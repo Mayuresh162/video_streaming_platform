@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { YOUTUBE_COMMENTS_API } from '../utils/constants';
+import React from 'react'
 import { commentsData } from '../utils/data';
 
 const Comment = ({ data }) => {
