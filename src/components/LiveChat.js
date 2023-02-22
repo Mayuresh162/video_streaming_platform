@@ -24,7 +24,7 @@ const LiveChat = () => {
     }, 2000);
 
     return () => clearInterval(i);
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className='border border-gray-500 h-[600px] rounded-2xl'>

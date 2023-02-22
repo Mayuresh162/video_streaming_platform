@@ -20,24 +20,25 @@ const Header = () => {
         getSearchSuggestions();
       }
     }, 200);
+    
+    const getSearchSuggestions = async () => {
+      const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+      const json = await data.json();
+      setSuggestions(json[1]);
+  
+      // update cache
+      dispatch(
+        cacheResults({
+          [searchQuery]: json[1],
+        })
+      );
+    };
 
     return () => {
       clearTimeout(timer);
     };
-  }, [searchQuery]);
+  }, [searchQuery, searchCache, dispatch]);
 
-  const getSearchSuggestions = async () => {
-    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
-    const json = await data.json();
-    setSuggestions(json[1]);
-
-    // update cache
-    dispatch(
-      cacheResults({
-        [searchQuery]: json[1],
-      })
-    );
-  };
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
