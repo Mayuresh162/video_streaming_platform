@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const toggleSlice = createSlice({
     name: 'toggle',
     initialState: {
-        isOpen: false
+        isOpen: false,
+        isDark: false
     },
     reducers: {
         toggleMenu: (state) => {
@@ -11,10 +12,13 @@ const toggleSlice = createSlice({
         },
         closeMenu: (state) => {
             state.isOpen = false;
-        }
+        },
+        toggleTheme: (state) => {
+            state.isDark = !state.isDark;
+        },
     }
 });
 
-export const { toggleMenu, closeMenu } = toggleSlice.actions;
+export const { toggleMenu, closeMenu, toggleTheme } = toggleSlice.actions;
 
 export default toggleSlice.reducer;
