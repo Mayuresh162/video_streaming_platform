@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useVideo from "../utils/useVideo";
 import { useSelector } from "react-redux";
 
+
 const VideoList = () => {
   const [count, setCount] = useState(null);
   const [token, setPageToken] = useState(null);
@@ -24,7 +25,7 @@ const VideoList = () => {
       }
     })
     if (node) observer.current.observe(node)
-  }, [hasMore, videoCount, pageToken])
+  }, [hasMore, videoCount, pageToken]);
 
 
   return (

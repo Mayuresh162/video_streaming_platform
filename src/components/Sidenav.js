@@ -10,10 +10,11 @@ import {
 
 const Sidenav = () => {
   const isMenuOpen = useSelector((store) => store.toggle.isOpen);
+  const themeChange = useSelector((store) => store.toggle.isDark);
 
   return (
     isMenuOpen && (
-      <div className="ml-2 p-5 shadow-lg w-72 flex flex-col overflow-y-scroll">
+      <div className={`p-5 shadow-lg w-72 flex flex-col overflow-y-scroll ${themeChange && "bg-black"}`}>
         <div className="border-b border-b-gray-400 pb-2 flex flex-col">
           {homeIcons.map((elem, index) => (
             <SidenavOptions elem={elem} key={index}/>
@@ -24,7 +25,7 @@ const Sidenav = () => {
             <SidenavOptions elem={elem} key={index} />
           ))}
         </div>
-        <span>Explore</span>
+        <span className={`${themeChange && "text-white"}`}>Explore</span>
         <div className="border-b border-b-gray-400 pb-2 flex flex-col">
           {exploreIcons.map((elem, index) => (
             <SidenavOptions elem={elem} key={index} />

@@ -9,6 +9,7 @@ const LiveChat = () => {
   const dispatch = useDispatch();
 
   const chatMessages = useSelector((store) => store.chat.messages);
+  const themeChange = useSelector((store) => store.toggle.isDark);
 
   useEffect(() => {
     const i = setInterval(() => {
@@ -29,7 +30,7 @@ const LiveChat = () => {
   return (
     <div className='border border-gray-500 h-[600px] rounded-2xl'>
       <div className='h-[10%] flex items-center pl-3'>
-        <span>Top Chat</span>
+        <span className={`${themeChange && "text-white"}`}>Top Chat</span>
       </div>
       <div className="w-full p-2 overflow-y-scroll flex flex-col-reverse h-[80%]">
         <div>
@@ -57,7 +58,7 @@ const LiveChat = () => {
         }}
       >
         <input
-          className="px-2 w-96 outline-none border-b border-gray mb-2"
+          className={`px-2 w-96 outline-none border-b border-gray mb-2 ${themeChange && "text-white bg-black"}`}
           type="text"
           placeholder="Say something..."
           value={liveMessage}
@@ -65,7 +66,7 @@ const LiveChat = () => {
             setLiveMessage(e.target.value);
           }}
         />
-        <button className="px-2 mx-2 bg-green-100">Send</button>
+        <button className="px-2 mx-2 bg-green-100" >Send</button>
       </form>
     </div>
   )
