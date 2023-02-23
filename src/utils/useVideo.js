@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { YOUTUBE_VIDEOS_API } from "../utils/constants";
 import { setToken } from "./tokenSlice";
@@ -10,8 +10,8 @@ const useVideo = (count, token) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const getVideos = async () => {
+  const getVideos = useCallback(
+    async () => {
       let url = YOUTUBE_VIDEOS_API;
       if (token) {
         url = YOUTUBE_VIDEOS_API + `&pageToken=${token}`;
@@ -22,15 +22,14 @@ const useVideo = (count, token) => {
       setVideoCount(prevCount => prevCount + 20);
       setHasMore(json.pageInfo.totalResults > 0);
       dispatch(setToken(json.nextPageToken));
-    };
+    }, [token, dispatch]
+  );
 
+  useEffect(() => {
     getVideos()
-  }, [count, token, dispatch]);
+  }, [getVideos]);
 
-  // console.log(count, videoCount, hasMore, videos.length, token)
-
-  
-  
+  // console.log(count, videoCount, hasMore, videos.length, token);
   return { videos, hasMore, videoCount };
 };
 
