@@ -17,7 +17,9 @@ const Header = () => {
       if (searchQuery && searchCache[searchQuery]) {
         setSuggestions(searchCache[searchQuery]);
       } else {
-        getSearchSuggestions();
+        if (searchQuery) {
+          getSearchSuggestions();
+        }
       }
     }, 200);
     
