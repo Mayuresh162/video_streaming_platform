@@ -27,7 +27,7 @@ const useVideo = (count, token) => {
 
   useEffect(() => {
     getVideos()
-  }, [getVideos]);
+  }, [count, getVideos]);
 
   // console.log(count, videoCount, hasMore, videos.length, token);
   return { videos, hasMore, videoCount };
