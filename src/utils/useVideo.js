@@ -11,23 +11,25 @@ const useVideo = (count, token) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const getVideos = async () => {
+      let url = YOUTUBE_VIDEOS_API;
+      if (token) {
+        url = YOUTUBE_VIDEOS_API + `&pageToken=${token}`;
+      }
+      const data = await fetch(url);
+      const json = await data.json();
+      setVideos(prevVideos => [...prevVideos, ...json.items]);
+      setVideoCount(prevCount => prevCount + 20);
+      setHasMore(json.pageInfo.totalResults > 0);
+      dispatch(setToken(json.nextPageToken));
+    };
+
     getVideos()
-  }, [count, token]);
+  }, [count, token, dispatch]);
 
-  console.log(count, videoCount, hasMore, videos.length, token)
+  // console.log(count, videoCount, hasMore, videos.length, token)
 
-  const getVideos = async () => {
-    let url = YOUTUBE_VIDEOS_API;
-    if (token) {
-      url = YOUTUBE_VIDEOS_API + `&pageToken=${token}`;
-    }
-    const data = await fetch(url);
-    const json = await data.json();
-    setVideos(prevVideos => [...prevVideos, ...json.items]);
-    setVideoCount(prevCount => prevCount + 20);
-    setHasMore(json.pageInfo.totalResults > 0);
-    dispatch(setToken(json.nextPageToken));
-  };
+  
   
   return { videos, hasMore, videoCount };
 };
