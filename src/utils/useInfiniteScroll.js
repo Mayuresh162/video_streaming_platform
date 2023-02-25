@@ -6,12 +6,10 @@ function useInfiniteScroll() {
   const loadMoreRef = useRef(null);
 
   const pageToken = useSelector(store => store.token.pageToken);
-  console.log('outside', pageToken)
 
   const handleObserver = useCallback((entries) => {
     const [target] = entries;
     if (target.isIntersecting) {
-      console.log('m here', pageToken);
       setPage(pageToken);
     }
   }, [pageToken]);
