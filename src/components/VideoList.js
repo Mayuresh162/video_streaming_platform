@@ -32,9 +32,7 @@ const VideoList = () => {
   const { loadMoreRef, page } = useInfiniteScroll();
 
   const { loading, videos } = useFetch(page);
-
-  console.log(videos, page)
-
+  
   return (
     <div className="flex flex-wrap px-9">
       <>
